@@ -18,7 +18,7 @@
 
 .search {
     position: relative;
-    width: 774px;
+    width: 700px;
     height: 34px;
     display: flex;
     padding-left: 20px;
@@ -91,5 +91,12 @@
 }
 .content {
     font-size: 16px;
+
     padding-left: 15px;
+}
+
+.more-btn {
+    font-size: 2rem;
+    padding-left: 3px;
+    background-color: transparent;
 }

@@ -3,11 +3,33 @@ import styles from './Header.module.scss'
 
 import Tippy from '@tippyjs/react/headless'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import {
+    faCircleXmark,
+    faSpinner,
+    faMagnifyingGlass,
+    faEllipsisH,
+    faEllipsisVertical,
+    faEarthAsia,
+    faCircleQuestion,
+} from '@fortawesome/free-solid-svg-icons'
 import images from '~/assets/images'
 import Button from '~/Components/Layout/components/Button'
 import { Wrapper as PopperWrapper } from '~/Components/Layout/components/Popper'
+import Menu from '../Popper/Menu'
 const cx = classNames.bind(styles)
+
+const MENU_ITEMS = [
+    {
+        icons: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'Tiếng Việt',
+    },
+    {
+        // icons: <FontAwesomeIcon icon="fa-solid fa-question" />,
+        icons: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Feedback',
+        to: '/feedback',
+    },
+]
 function Header() {
     return (
         <header className={cx('wrapper')}>
@@ -37,10 +59,16 @@ function Header() {
                     </div>
                 </Tippy>
 
-                <div className={cx('action')}></div>
                 <div className={cx('actions')}>
                     <Button text>Upload</Button>
                     <Button primary>Log in</Button>
+                    <Menu items={MENU_ITEMS}>
+                        <span>
+                            <Button className={cx('more-btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </Button>
+                        </span>
+                    </Menu>
                 </div>
             </div>
         </header>

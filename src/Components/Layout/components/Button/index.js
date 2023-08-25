@@ -7,6 +7,7 @@ const cx = classNames.bind(styles)
 function Button({
     to,
     href,
+
     primary = false,
     outline = false,
     text = false,
@@ -48,6 +49,7 @@ function Button({
         [className]: className,
         primary,
         outline,
+
         text,
         disabled,
         rounded,
