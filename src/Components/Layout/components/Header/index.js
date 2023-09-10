@@ -18,10 +18,28 @@ import { Wrapper as PopperWrapper } from '~/Components/Layout/components/Popper'
 import Menu from '../Popper/Menu'
 const cx = classNames.bind(styles)
 
+//handle logic
+const handleChange = (menuItem ) => {
+    console.log(menuItem);
+}
+
 const MENU_ITEMS = [
     {
         icons: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'Tiếng Việt',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    code: 'en',
+                    title: 'English'
+                },
+                {
+                    code: 'vi',
+                    title: 'Tiếng Việt'
+                },
+            ]
+        }
     },
     {
         // icons: <FontAwesomeIcon icon="fa-solid fa-question" />,
@@ -62,7 +80,7 @@ function Header() {
                 <div className={cx('actions')}>
                     <Button text>Upload</Button>
                     <Button primary>Log in</Button>
-                    <Menu items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange = {handleChange}>
                         <span>
                             <Button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
