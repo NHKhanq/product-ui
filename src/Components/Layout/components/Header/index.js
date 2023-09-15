@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind'
 import styles from './Header.module.scss'
 
-import 'tippy.js/dist/tippy.css';
+import 'tippy.js/dist/tippy.css'
 import Tippy from '@tippyjs/react'
 import HeadlessTippy from '@tippyjs/react/headless'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,6 +19,7 @@ import {
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons'
 import images from '~/assets/images'
+import Image from '../image'
 import Button from '~/Components/Layout/components/Button'
 import { Wrapper as PopperWrapper } from '~/Components/Layout/components/Popper'
 import Menu from '../Popper/Menu'
@@ -26,11 +27,11 @@ import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons'
 const cx = classNames.bind(styles)
 
 //handle logic
-const handleChange = (menuItem ) => {
-    console.log(menuItem);
+const handleChange = (menuItem) => {
+    console.log(menuItem)
 }
 
-const currenUser = true;
+const currenUser = true
 
 const MENU_ITEMS = [
     {
@@ -41,14 +42,14 @@ const MENU_ITEMS = [
             data: [
                 {
                     code: 'en',
-                    title: 'English'
+                    title: 'English',
                 },
                 {
                     code: 'vi',
-                    title: 'Tiếng Việt'
+                    title: 'Tiếng Việt',
                 },
-            ]
-        }
+            ],
+        },
     },
     {
         // icons: <FontAwesomeIcon icon="fa-solid fa-question" />,
@@ -57,7 +58,6 @@ const MENU_ITEMS = [
         to: '/feedback',
     },
 ]
-
 
 const userMenu = [
     {
@@ -71,7 +71,7 @@ const userMenu = [
         to: '/setting',
     },
     ...MENU_ITEMS,
-   
+
     {
         icons: <FontAwesomeIcon icon={faSignOut} />,
         title: 'Log out',
@@ -107,47 +107,43 @@ function Header() {
                     </div>
                 </HeadlessTippy>
 
-
                 {/* check user dang nhap de tra va giao dien nguoidung  */}
 
                 <div className={cx('actions')}>
                     {currenUser ? (
                         <>
-                        <Tippy content='Upload' placement='bottom' delay={200}>
-                            <button className={cx('action-btn')}>
-                                <FontAwesomeIcon icon ={faUpload} /> 
-                               
-                            </button>
-                        </Tippy>
-                        <Tippy content='Message' placement='bottom' delay={200}>
-                            <button className={cx('action-btn')}>
-                                
-                                <FontAwesomeIcon icon ={faFacebookMessenger} /> 
-                            </button>
-                        </Tippy>
+                            <Tippy content="Upload" placement="bottom" delay={200}>
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faUpload} />
+                                </button>
+                            </Tippy>
+                            <Tippy content="Message" placement="bottom" delay={200}>
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faFacebookMessenger} />
+                                </button>
+                            </Tippy>
                         </>
-                       
-                    ): (
-                  <>
-                        <Button text>Upload</Button>
-                        <Button primary>Log in</Button>
-                        
-                  </>
-
+                    ) : (
+                        <>
+                            <Button text>Upload</Button>
+                            <Button primary>Log in</Button>
+                        </>
                     )}
-                    <Menu items={currenUser ? userMenu: MENU_ITEMS} onChange = {handleChange}>
+                    <Menu items={currenUser ? userMenu : MENU_ITEMS} onChange={handleChange}>
                         {currenUser ? (
-                            <img className={cx('user-avt')} src='https://cdnimg.vietnamplus.vn/uploaded/bokttj/2023_01_02/avatar_the_way_of_water.jpg' alt='Nguyen Hoang Khang' />
-                        ): (
-                    
+                            <Image
+                                className={cx('user-avt')}
+                                src="https://cdnimg.vietnamplus.vn/uploaded/bokttj/2023_01_02/avatar_the_way_of_water.jpg"
+                                alt="Nguyen Hoang Khang"
+                            />
+                        ) : (
                             <span>
                                 <Button className={cx('more-btn')}>
                                     <FontAwesomeIcon icon={faEllipsisVertical} />
                                 </Button>
                             </span>
-
                         )}
-                        </Menu>
+                    </Menu>
                 </div>
             </div>
         </header>
