@@ -28,6 +28,7 @@ function Menu({ children, items = [], onChange = defaultFN }) {
     }
     return (
         <Tippy
+            onHide={()=> setHis(prev=> prev.slice(0, 1))} // hov 
             delay={[0, 500]}
             interactive="true"
             placement="bottom-end"

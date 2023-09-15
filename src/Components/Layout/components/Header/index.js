@@ -1,7 +1,9 @@
 import classNames from 'classnames/bind'
 import styles from './Header.module.scss'
 
-import Tippy from '@tippyjs/react/headless'
+import 'tippy.js/dist/tippy.css';
+import Tippy from '@tippyjs/react'
+import HeadlessTippy from '@tippyjs/react/headless'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faCircleXmark,
@@ -11,17 +13,24 @@ import {
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
+    faUpload,
+    faUser,
+    faGear,
+    faSignOut,
 } from '@fortawesome/free-solid-svg-icons'
 import images from '~/assets/images'
 import Button from '~/Components/Layout/components/Button'
 import { Wrapper as PopperWrapper } from '~/Components/Layout/components/Popper'
 import Menu from '../Popper/Menu'
+import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons'
 const cx = classNames.bind(styles)
 
 //handle logic
 const handleChange = (menuItem ) => {
     console.log(menuItem);
 }
+
+const currenUser = true;
 
 const MENU_ITEMS = [
     {
@@ -48,6 +57,27 @@ const MENU_ITEMS = [
         to: '/feedback',
     },
 ]
+
+
+const userMenu = [
+    {
+        icons: <FontAwesomeIcon icon={faUser} />,
+        title: 'View Profile',
+        to: '/@123',
+    },
+    {
+        icons: <FontAwesomeIcon icon={faGear} />,
+        title: 'Setting',
+        to: '/setting',
+    },
+    ...MENU_ITEMS,
+   
+    {
+        icons: <FontAwesomeIcon icon={faSignOut} />,
+        title: 'Log out',
+        to: '/log out',
+    },
+]
 function Header() {
     return (
         <header className={cx('wrapper')}>
@@ -55,7 +85,7 @@ function Header() {
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="tiktok" />
                 </div>
-                <Tippy
+                <HeadlessTippy
                     interactive="true"
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1">
@@ -75,18 +105,49 @@ function Header() {
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                     </div>
-                </Tippy>
+                </HeadlessTippy>
+
+
+                {/* check user dang nhap de tra va giao dien nguoidung  */}
 
                 <div className={cx('actions')}>
-                    <Button text>Upload</Button>
-                    <Button primary>Log in</Button>
-                    <Menu items={MENU_ITEMS} onChange = {handleChange}>
-                        <span>
-                            <Button className={cx('more-btn')}>
-                                <FontAwesomeIcon icon={faEllipsisVertical} />
-                            </Button>
-                        </span>
-                    </Menu>
+                    {currenUser ? (
+                        <>
+                        <Tippy content='Upload' placement='bottom' delay={200}>
+                            <button className={cx('action-btn')}>
+                                <FontAwesomeIcon icon ={faUpload} /> 
+                               
+                            </button>
+                        </Tippy>
+                        <Tippy content='Message' placement='bottom' delay={200}>
+                            <button className={cx('action-btn')}>
+                                
+                                <FontAwesomeIcon icon ={faFacebookMessenger} /> 
+                            </button>
+                        </Tippy>
+                        </>
+                       
+                    ): (
+                  <>
+                        <Button text>Upload</Button>
+                        <Button primary>Log in</Button>
+                        
+                  </>
+
+                    )}
+                    <Menu items={currenUser ? userMenu: MENU_ITEMS} onChange = {handleChange}>
+                        {currenUser ? (
+                            <img className={cx('user-avt')} src='https://cdnimg.vietnamplus.vn/uploaded/bokttj/2023_01_02/avatar_the_way_of_water.jpg' alt='Nguyen Hoang Khang' />
+                        ): (
+                    
+                            <span>
+                                <Button className={cx('more-btn')}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </Button>
+                            </span>
+
+                        )}
+                        </Menu>
                 </div>
             </div>
         </header>
