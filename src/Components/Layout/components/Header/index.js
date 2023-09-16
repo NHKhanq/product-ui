@@ -1,15 +1,11 @@
 import classNames from 'classnames/bind'
 import styles from './Header.module.scss'
-
+import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons'
 import 'tippy.js/dist/tippy.css'
 import Tippy from '@tippyjs/react'
-import HeadlessTippy from '@tippyjs/react/headless'
+import Search from '../Search'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    faCircleXmark,
-    faSpinner,
-    faMagnifyingGlass,
-    faEllipsisH,
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
@@ -21,9 +17,7 @@ import {
 import images from '~/assets/images'
 import Image from '../image'
 import Button from '~/Components/Layout/components/Button'
-import { Wrapper as PopperWrapper } from '~/Components/Layout/components/Popper'
 import Menu from '../Popper/Menu'
-import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons'
 const cx = classNames.bind(styles)
 
 //handle logic
@@ -85,27 +79,8 @@ function Header() {
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="tiktok" />
                 </div>
-                <HeadlessTippy
-                    interactive="true"
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1">
-                            <PopperWrapper>
-                                <h3>demo</h3>
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Shoppe bao ship 0Đ - Đăng kí ngay!" />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+
+                <Search />
 
                 {/* check user dang nhap de tra va giao dien nguoidung  */}
 
